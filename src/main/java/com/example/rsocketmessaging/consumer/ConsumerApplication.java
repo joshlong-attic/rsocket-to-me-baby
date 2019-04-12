@@ -1,6 +1,7 @@
 package com.example.rsocketmessaging.consumer;
 
 import com.example.rsocketmessaging.Greeting;
+import com.example.rsocketmessaging.GreetingRequest;
 import io.rsocket.RSocket;
 import io.rsocket.RSocketFactory;
 import io.rsocket.frame.decoder.PayloadDecoder;
@@ -65,7 +66,7 @@ class GreetingsRestController {
 	Publisher<Greeting> greet(@PathVariable String name) {
 		return this.requester
 			.route("greet")
-			.data("Josh")
+			.data(new GreetingRequest("Josh"))
 			.retrieveFlux(Greeting.class);
 	}
 }
