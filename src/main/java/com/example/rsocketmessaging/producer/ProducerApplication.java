@@ -1,6 +1,8 @@
 package com.example.rsocketmessaging.producer;
 
 import com.example.rsocketmessaging.Greeting;
+import com.example.rsocketmessaging.GreetingRequest;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -19,8 +21,8 @@ public class ProducerApplication {
 class GreetingsRSocketController {
 
 	@MessageMapping("greet")
-	Greeting greet(String name) {
-		return new Greeting("Hello " + name + "!");
+	Greeting greet(GreetingRequest request) {
+		return new Greeting("Hello " + request.getName() + "!");
 	}
 }
 

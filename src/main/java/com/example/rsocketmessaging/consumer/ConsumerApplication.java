@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.MediaType;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.messaging.rsocket.RSocketStrategies;
 import org.springframework.util.MimeTypeUtils;
@@ -35,14 +36,14 @@ class ConsumerConfiguration {
 
 	@Bean
 	RSocketRequester requester(RSocketStrategies strategies) {
-		return RSocketRequester.create(rSocket(), MimeTypeUtils.TEXT_PLAIN, strategies);
+		return RSocketRequester.create(rSocket(), MimeTypeUtils.APPLICATION_JSON, strategies);
 	}
 
 	@Bean
 	RSocket rSocket() {
 		return RSocketFactory
 			.connect()
-			.dataMimeType(MimeTypeUtils.TEXT_PLAIN_VALUE)
+			.dataMimeType(MediaType.APPLICATION_JSON_VALUE)
 			.frameDecoder(PayloadDecoder.ZERO_COPY)
 			.transport(TcpClientTransport.create(7000))
 			.start()
