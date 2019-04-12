@@ -29,17 +29,16 @@ public class ConsumerApplication {
 	}
 }
 
+@Lazy
 @Configuration
 class ConsumerConfiguration {
 
 	@Bean
-	@Lazy
 	RSocketRequester requester(RSocketStrategies strategies) {
 		return RSocketRequester.create(rSocket(), MimeTypeUtils.TEXT_PLAIN, strategies);
 	}
 
 	@Bean
-	@Lazy
 	RSocket rSocket() {
 		return RSocketFactory
 			.connect()
